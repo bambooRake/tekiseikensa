@@ -1,9 +1,16 @@
 let circle = document.getElementById('circle');
 let carSound = document.getElementById('carSound');
 let brakeSound = document.getElementById('brakeSound');
+let startButton = document.getElementById('startButton');
 
-// 初期状態として青に設定して、次に切り替えるまでの待ち時間を設定
-setBlue();
+function startSounds() {
+    // 開始ボタンを非表示にする
+    startButton.style.display = 'none';
+
+    // 初期状態として青に設定して、次に切り替えるまでの待ち時間を設定
+    setBlue();
+}
+
 
 function setRed() {
     circle.classList.remove('blue');
