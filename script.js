@@ -32,6 +32,7 @@ function setBlue() {
     circle.classList.add('blue');
 
     // ブレーキ音を停止
+    brakeSound.play();
     brakeSound.pause();
     brakeSound.currentTime = 0;
 
