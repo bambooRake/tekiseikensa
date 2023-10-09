@@ -23,7 +23,7 @@ function setRed() {
     // ブレーキ音を再生
     brakeSound.play();
 
-    let timeoutDuration = getRandomTime(2000, 7000); // 2-5秒
+    let timeoutDuration = getRandomTime(2000, 5000); // 2-5秒
     setTimeout(setBlue, timeoutDuration);
 }
 
@@ -39,7 +39,7 @@ function setBlue() {
     // 加速音を再生
     carSound.play();
 
-    let timeoutDuration = getRandomTime(5000, 12000); // 5-9秒
+    let timeoutDuration = getRandomTime(4000, 8000); // 4-8秒
     setTimeout(setRed, timeoutDuration);
 }
 
