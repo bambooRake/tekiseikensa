@@ -39,7 +39,7 @@ function setBlue() {
     // 加速音を再生
     carSound.play();
 
-    let timeoutDuration = getRandomTime(4000, 8000); // 4-8秒
+    let timeoutDuration = getRandomTime(3000, 8000); // 3-8秒
     setTimeout(setRed, timeoutDuration);
 }
 
