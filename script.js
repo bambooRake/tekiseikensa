@@ -152,3 +152,5 @@ window.addEventListener("resize", resizeImg);
 
 // 初期化時にimgタグのサイズを設定する
 resizeImg();
+
+alert("開始を押して、しばらくすると音が鳴り出しますのでご注意下さい。")
