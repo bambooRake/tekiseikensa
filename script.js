@@ -11,6 +11,8 @@ let intervalDuration = 0;
 let count = 0;
 
 function startButtonFunc() {
+    alert("しばらくすると音が鳴り出しますのでご注意下さい。");
+    
     // 開始ボタンを非表示にする
     seni = 1;
     intervalDuration = 0;
@@ -152,5 +154,3 @@ window.addEventListener("resize", resizeImg);
 
 // 初期化時にimgタグのサイズを設定する
 resizeImg();
-
-alert("開始を押して、しばらくすると音が鳴り出しますのでご注意下さい。")
