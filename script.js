@@ -31,6 +31,7 @@ function stopButtonFunc() {
     clearInterval(intervalId);
 
     resetSounds();
+    hideTextContainer();
 }
 
 function resetSounds() {
@@ -137,3 +138,17 @@ function showCircle() {
 function hideCircle() {
     circle.style.display = 'none';
 }
+
+function resizeImg() {
+    var img = document.getElementById("annotationImg");
+    var windowWidth = window.innerWidth;
+    var windowHeight = window.innerHeight;
+    var imgSize = (windowWidth < windowHeight ? windowWidth : windowHeight) * 0.8; // 画面の小さい方の80%に設定
+    img.style.width = imgSize + "px";
+}
+
+// ウィンドウのリサイズ時にimgタグのサイズを再計算する
+window.addEventListener("resize", resizeImg);
+
+// 初期化時にimgタグのサイズを設定する
+resizeImg();
