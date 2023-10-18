@@ -5,7 +5,9 @@ body {
     justify-content: center;
     align-items: center;
     background-color: black;
+    color: white;
     flex-direction: column;
+    font-size: xx-large;
 }
 
 .container {

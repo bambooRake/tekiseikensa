@@ -3,7 +3,7 @@ let carSound = document.getElementById('carSound');
 let brakeSound = document.getElementById('brakeSound');
 let startButton = document.getElementById('startButton');
 let stopButton = document.getElementById('stopButton');
-
+let annotationLine = document.getElementsByClassName('annotation-line')[0];
 
 let intervalId;
 let seni = 1;
@@ -11,8 +11,6 @@ let intervalDuration = 0;
 let count = 0;
 
 function startButtonFunc() {
-    alert("しばらくすると音が鳴り出しますのでご注意下さい。");
-    
     // 開始ボタンを非表示にする
     seni = 1;
     intervalDuration = 0;
@@ -21,6 +19,7 @@ function startButtonFunc() {
     stopButton.style.display = 'block';
 
     startInterval();
+    annotationLine.style.display = 'none';
 
 }
 
@@ -34,6 +33,8 @@ function stopButtonFunc() {
 
     resetSounds();
     hideTextContainer();
+    annotationLine.style.display = 'block';
+
 }
 
 function resetSounds() {
@@ -101,7 +102,7 @@ function startInterval() {
                 setRed();
                 intervalDuration = getRandomTime(3000, 6000);
                 count++;
-                if(count >= 5) {
+                if (count >= 5) {
                     count = 0;
                     seni = 1;
                 }
