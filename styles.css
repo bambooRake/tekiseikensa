@@ -10,14 +10,15 @@ body {
 
 .container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
 
 .circle {
-    width: 60vw; /* 一時的なデフォルトサイズ */
-    height: 60vw; /* 一時的なデフォルトサイズ */
+    width: 20vw; /* 一時的なデフォルトサイズ */
+    height: 20vh; /* 一時的なデフォルトサイズ */
     border-radius: 70%;
     margin: 20px;
     transition: width 0.2s, height 0.2s; /* サイズ変更のアニメーションを滑らかにする */
@@ -25,8 +26,39 @@ body {
 
 .blue {
     background-color: blue;
+    margin-left: 45vw;
 }
 
 .red {
     background-color: red;
+    margin-right: 45vw;
+}
+
+#startButton {
+    font-size: 2em;
+    padding: 10px 20px;
+    margin-top: 10vh;
+}
+
+#stopButton {
+    font-size: 2em;
+    padding: 10px 20px;
+    margin-bottom: 10vh;
+    display: none;
+}
+
+.vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-size: 48px;
+    font-weight: bold;
+    color: white;
+    margin: 0;
+    line-height: 5.5; /* 行間を広くする */
+    padding: 0;
+
+}
+
+.text-container {
+    display: none;
 }

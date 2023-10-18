@@ -7,11 +7,15 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <button id="startButton" onclick="startSounds()">開始</button>
 
     <div class="container">
         <div class="circle" id="circle"></div>
+        <div class="text-container">
+            <p class="vertical-text">青丸のときにはアクセル、<br>赤丸のときにはブレーキ、<br>を踏み続けて下さい。</p>
+        </div>
+        <button id="startButton" onclick="startButtonFunc()">開始</button>
     </div>
+    <button id="stopButton" onclick="stopButtonFunc()">停止</button>
 
     <audio id="carSound" src="start.mp3" preload="auto"></audio>
     <audio id="brakeSound" src="stop.mp3" preload="auto"></audio>

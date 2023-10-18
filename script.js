@@ -2,61 +2,138 @@ let circle = document.getElementById('circle');
 let carSound = document.getElementById('carSound');
 let brakeSound = document.getElementById('brakeSound');
 let startButton = document.getElementById('startButton');
+let stopButton = document.getElementById('stopButton');
 
-function startSounds() {
+
+let intervalId;
+let seni = 1;
+let intervalDuration = 0;
+let count = 0;
+
+function startButtonFunc() {
     // 開始ボタンを非表示にする
+    seni = 1;
+    intervalDuration = 0;
+    count = 0;
     startButton.style.display = 'none';
+    stopButton.style.display = 'block';
 
-    // 初期状態として青に設定して、次に切り替えるまでの待ち時間を設定
-    setBlue();
+    startInterval();
+
 }
 
+function stopButtonFunc() {
+    // 開始ボタンを表示する
+    startButton.style.display = 'block';
+    stopButton.style.display = 'none';
 
-function setRed() {
-    circle.classList.remove('blue');
-    circle.classList.add('red');
+    // インターバルを停止
+    clearInterval(intervalId);
 
-    // 加速音を停止
+    resetSounds();
+}
+
+function resetSounds() {
+    // サウンドを停止
     carSound.pause();
     carSound.currentTime = 0;
+    brakeSound.pause();
+    brakeSound.currentTime = 0;
 
-    // ブレーキ音を再生
-    brakeSound.play();
+    // 赤青のクラスを削除
+    circle.classList.remove('blue');
+    circle.classList.remove('red');
 
-    let timeoutDuration = getRandomTime(2000, 5000); // 2-5秒
-    setTimeout(setBlue, timeoutDuration);
+}
+
+function showTextContainer() {
+    let textContainer = document.getElementsByClassName('text-container');
+    textContainer[0].style.display = 'block';
+    seni = 2;
+}
+
+function hideTextContainer() {
+    let textContainer = document.getElementsByClassName('text-container');
+    textContainer[0].style.display = 'none';
 }
 
 function setBlue() {
     circle.classList.remove('red');
     circle.classList.add('blue');
 
-    // ブレーキ音を停止
-    brakeSound.play();
-    brakeSound.pause();
-    brakeSound.currentTime = 0;
-
-    // 加速音を再生
+    // ブレーキ音を再生
     carSound.play();
 
-    let timeoutDuration = getRandomTime(3000, 8000); // 3-8秒
-    setTimeout(setRed, timeoutDuration);
+    seni = 3;
+}
+
+function setRed() {
+    circle.classList.remove('blue');
+    circle.classList.add('red');
+
+    // ブレーキ音を再生
+    brakeSound.play();
+
+    seni = 2;
+}
+
+function startInterval() {
+    intervalId = setInterval(function () {
+        switch (seni) {
+            case 1:
+                hideCircle();
+                resetSounds();
+                showTextContainer();
+                intervalDuration = getRandomTime(5000, 7000);
+                break;
+            case 2:
+                hideTextContainer();
+                showCircle();
+                resetSounds();
+                setBlue();
+                intervalDuration = getRandomTime(4500, 7000);
+                break;
+            case 3:
+                resetSounds();
+                setRed();
+                intervalDuration = getRandomTime(3000, 6000);
+                count++;
+                if(count >= 5) {
+                    count = 0;
+                    seni = 1;
+                }
+                break;
+        }
+        // インターバルを挟むごとにランダムでインターバル時間を更新する
+        clearInterval(intervalId);
+        startInterval();
+    }, intervalDuration);
 }
 
 function getRandomTime(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-
 adjustCircleSize();
 
 window.addEventListener('resize', adjustCircleSize); // ウィンドウサイズが変わったときも調整
 
 function adjustCircleSize() {
+    hideCircle();
+
     let vw = window.innerWidth;  // viewport width
     let vh = window.innerHeight; // viewport height
 
-    let size = (vw < vh ? vw : vh) * 0.5; // 短い辺の30%
+    let size = (vw < vh ? vw : vh) * 0.3; // 短い辺の30%
     circle.style.width = `${size}px`;
     circle.style.height = `${size}px`;
+    showCircle();
+}
+
+function showCircle() {
+    circle.style.display = 'block';
+}
+
+function hideCircle() {
+    circle.style.display = 'none';
 }
