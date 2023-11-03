@@ -61,6 +61,29 @@ function hideTextContainer() {
     textContainer[0].style.display = 'none';
 }
 
+function showTextCountContainer() {
+    let textCountContainer = document.getElementsByClassName('text-count-container');
+    let prevElement = textCountContainer[0].querySelector('.prev');
+    let firstLine = textCountContainer[0].querySelector('.first-line');
+    let nextElement = textCountContainer[0].querySelector('.next');
+
+    prevElement.textContent = count;
+    nextElement.textContent = count + 1;
+
+    textCountContainer[0].style.display = 'block';
+    if (count == 0) {
+        firstLine.style.display = 'none';
+    } else {
+        firstLine.style.display = 'block';
+    }
+    seni = 3;
+}
+
+function hideTextCountContainer() {
+    let textCountContainer = document.getElementsByClassName('text-count-container');
+    textCountContainer[0].style.display = 'none';
+}
+
 function setBlue() {
     circle.classList.remove('red');
     circle.classList.add('blue');
@@ -68,7 +91,7 @@ function setBlue() {
     // ブレーキ音を再生
     carSound.play();
 
-    seni = 3;
+    seni = 4;
 }
 
 function setRed() {
@@ -85,28 +108,36 @@ function startInterval() {
     intervalId = setInterval(function () {
         switch (seni) {
             case 1:
-                hideCircle();
                 resetSounds();
+                hideCircle();
+                hideTextCountContainer();
                 showTextContainer();
-                intervalDuration = getRandomTime(5000, 7000);
+                intervalDuration = getRandomTime(3000, 5000);
                 break;
             case 2:
-                hideTextContainer();
-                showCircle();
                 resetSounds();
-                setBlue();
-                intervalDuration = getRandomTime(4500, 7000);
+                hideTextContainer();
+                showTextCountContainer();
+                intervalDuration = getRandomTime(3000, 5000);
                 break;
             case 3:
                 resetSounds();
+                hideTextCountContainer();
+                showCircle();
+                setBlue();
+                intervalDuration = getRandomTime(4500, 7000);
+                break;
+            case 4:
+                resetSounds();
                 setRed();
-                intervalDuration = getRandomTime(3000, 6000);
                 count++;
                 if (count >= 5) {
                     count = 0;
                     seni = 1;
                 }
+                intervalDuration = getRandomTime(3000, 6000);
                 break;
+                
         }
         // インターバルを挟むごとにランダムでインターバル時間を更新する
         clearInterval(intervalId);
